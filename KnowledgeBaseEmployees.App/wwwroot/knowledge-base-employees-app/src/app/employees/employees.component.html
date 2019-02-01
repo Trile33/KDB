@@ -1,0 +1,56 @@
+<h2><label>Employees</label></h2>
+<div class="form-group" *ngIf="usedAs===0" >
+    <div class="row">
+            <div class="col-sm-4">
+                <button class="btn btn-light" [routerLink]="['/home']">Back</button>
+                <button class="btn btn-success" (click)="createNewEmployee()">
+                        <span class="fa fa-user-plus"></span>
+                        Add new Employee
+                </button>
+            </div>
+            <div class="col-sm-4">
+                    <input  name="Search" class="form-control" [(ngModel)]="esq.query" size="100" placeholder= "Search">
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" (click)="searchBy(esq)">
+                            <span class="fa fa-search"></span>
+                            Search
+                    </button>
+                </div>
+        </div>
+</div>
+
+<div *ngIf="usedAs===1 || usedAs===3 && employeesForAdding.length">
+    <b>Add employees: </b>
+    <div class="form-group">
+        <select class="form-control" [(ngModel)]="selectedEmployee">
+            <option *ngFor="let employee of employeesForAdding" [ngValue]="employee">{{employee.firstName}} {{employee.lastName}}</option>
+        </select> 
+    </div> 
+    <div *ngIf="usedAs===1">
+        <button class="btn btn-success" (click)="addEmployeeToProject()">
+                <span class="fa fa-user-plus"></span>
+                Add to Project
+        </button> 
+    </div> 
+    <div *ngIf="usedAs===3">
+        <button class="btn btn-success" (click)="addEmployeeToTechnology()">
+                <span class="fa fa-user-plus"></span>
+                Add to Technology
+        </button> 
+    </div>
+    <hr>
+</div>
+<p></p>
+<div *ngFor="let employee of employees">
+    <app-employee [employee]="employee" (click)="onRowSelected(employee)"></app-employee>
+    <div *ngIf="usedAs===0">
+        <button class="btn btn-danger" (click)="delete(employee.id)">Delete</button>
+    </div>
+    <div *ngIf="usedAs===1">
+        <button class="btn btn-danger" (click)="deleteEmployeeFromProject(employee.id)">Delete from Project</button>
+    </div>
+    <div *ngIf="usedAs===3">
+        <button class="btn btn-danger" (click)="deleteEmployeeFromTechnology(employee.id)">Delete from Technology</button>
+    </div>
+</div>

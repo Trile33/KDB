@@ -1,0 +1,56 @@
+<div class="container main" >
+    <form class="form-vertical">
+        <div class="form-group">
+            <div class="col-sm-4 py-2">
+                <a [routerLink]="['/projects']">
+                    <table>
+                        <tr>
+                            <h3 class="pointer blacktext"><label>Projects</label></h3>
+                        </tr>
+                        <tr>
+                            <div class="div1"></div>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-4 py-2">
+                    <a [routerLink]="['/employees']">
+                        <div>
+                            <table>
+                                <tr>
+                                    <h3 class="pointer"><label>Employees</label></h3>
+                                </tr>
+                                <tr>
+                                    <div class="div2"></div>    
+                                </tr>
+                            </table>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="col-sm-4 py-2">
+                        <a [routerLink]="['/technologies']">
+                            <div>
+                            <table>
+                                <tr>
+                                    <h3 class="pointer"><label>Technologies</label></h3>
+                                </tr>
+                                <tr>
+                                    <div class="div3"></div>
+                                </tr>
+                            </table>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+    </form>
+</div>
+
+<div id="content">
+      <div class="container">
+         <router-outlet></router-outlet>
+    </div>
+</div>

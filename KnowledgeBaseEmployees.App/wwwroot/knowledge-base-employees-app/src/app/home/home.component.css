@@ -1,0 +1,35 @@
+.div1 {
+    width: 250px;
+    height: 250px;
+    background:url(projlogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.div2 {
+    width: 250px;
+    height: 250px;
+    background:url(empslogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.div3 {
+    width: 250px;
+    height: 250px;
+    background:url(techlogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+h3{
+    text-align: center;
+}
+
+a{
+    color: #000;
+}
+
+a:hover{
+    color: #333;
+}

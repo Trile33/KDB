@@ -1,0 +1,141 @@
+app-employees,
+app-technologies,
+app-projects,
+app-employee-detail app-projects {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 200px;
+    min-width: 80px;
+}
+
+app-employee,
+app-technology {
+    display: block;
+}
+
+app-employee-detail app-projects app-project h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+h4{
+    display: inline-block;
+    vertical-align: top;
+    min-width: 80px;
+}
+
+body {
+    background-image: url("image.png");
+    background-size: 1760px 900px;
+}
+
+.navbar {
+    background-color:#333;
+    height: 100px;
+}
+
+a{
+    margin-top: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.logo{
+    background-image: url("logo.png");
+    background-size: contain;
+    width: 145px;
+    height: 90px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logo:hover{
+  background-color: #333;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover {background-color: #ddd;}
+
+  a:hover{
+      background-color: #ddd;
+  }
+
+  .logo-hover:hover{
+    background-color: #333 !important;
+  }
+
+  .nav-link-fade-up::before {
+    width: 100%;
+    bottom: 5px;
+    opacity: 0;
+    right: 0px;
+  }
+  
+  .nav-link-fade-up:hover::before {
+    bottom: 10px;
+    opacity: 1;
+  }
+
+  .nav-link {
+    float: left;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(236, 235, 235);
+    padding: 39px 20px;
+    margin: 0px 0px 0px 0px;
+    display: inline-block;
+    position: relative;
+    opacity: 0.75;
+  }
+  
+  .nav-link:hover {
+    opacity: 1;
+    color: #333;
+  }
+  
+  .nav-link::before {
+    transition: 300ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: #031D44;
+  }
+
+  .nav-link-grow-up::before {
+    height: 0%;
+    width: 100%;
+    bottom: 0px;
+    right: 0px;
+  }
+  
+  .nav-link-grow-up:hover::before {
+    height: 5px;
+  }

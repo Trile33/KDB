@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-5">
+        <h2><label>Employee: {{employee.firstName}} {{employee.lastName}}</label></h2>
+        <div class="form-group">
+            <button class="btn btn-light" [routerLink]="['/employees']">Back</button>
+        </div>
+        <form name="employeeForm" class="form-horizontal" (ngSubmit)="save()" [formGroup]="employeeFormGroup">
+            <fieldset>
+                <div class="form-group">
+                    <h5><label for="FirstName" class="control-label col-sm-4">First name:</label></h5>
+                    <div class="col-sm-8">
+                        <input name="FirstName" class="form-control" [formControl]="employeeFormGroup.controls['firstName']">
+                        <div class="alert alert-danger" *ngIf="employeeFormGroup.controls['firstName'].invalid">Required field.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5><label for="LastName" class="control-label col-sm-4">Last name:</label></h5>
+                    <div class="col-sm-8">
+                        <input name="LastName" class="form-control" [formControl]="employeeFormGroup.controls['lastName']">
+                        <div class="alert alert-danger" *ngIf="employeeFormGroup.controls['lastName'].invalid">Required field.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5><label for="Username" class="control-label col-sm-4">Username:</label></h5>
+                    <div class="col-sm-8">
+                        <input name="Username" class="form-control" [formControl]="employeeFormGroup.controls['username']">
+                        <div class="alert alert-danger" *ngIf="employeeFormGroup.controls['username'].invalid">Required field.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5><label for="Password" class="control-label col-sm-4">Password:</label></h5>
+                    <div class="col-sm-8">
+                        <input name="Password" class="form-control" [formControl]="employeeFormGroup.controls['password']">
+                        <div class="alert alert-danger" *ngIf="employeeFormGroup.controls['password'].invalid">Required field.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="IsTeamLead" class="control-label col-sm-4"></label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="IsTeamLead" [formControl]="employeeFormGroup.controls['isTeamLead']"
+                                [checked]="employee.isTeamLead"> Is team lead
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4"></label>
+                    <div class="col-sm-6">
+                        <button class="btn btn-success" type="submit" [disabled]="employeeFormGroup.invalid">Save</button>
+                        <button class="btn btn-primary" type="reset" (click)="reload()">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-sm-7">
+        <div *ngIf="employee.id">
+            <div class="col-sm-6">
+                <app-technologies [usedAs]="2"></app-technologies>
+            </div>
+            <div class="col-sm-6">
+                <app-projects [usedAs]="2"></app-projects>
+            </div>
+        </div>
+    </div>
+</div>
