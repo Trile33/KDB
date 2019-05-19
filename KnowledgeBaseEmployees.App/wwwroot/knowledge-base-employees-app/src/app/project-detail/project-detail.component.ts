@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 import { ProjectApiService } from 'app/api-services/project-api.service';
 import { Project } from '../models/project.model';
@@ -18,7 +19,8 @@ export class ProjectDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectApiService: ProjectApiService) {
+    private projectApiService: ProjectApiService,
+    private authGuard: AuthGuard) {
       this.project = new Project();
       route.params.subscribe(param => {
         this.projectId = param['id'];
@@ -26,6 +28,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authGuard.canRenderView();
     this.initForm();
 
     if (this.projectId) {

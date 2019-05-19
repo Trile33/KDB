@@ -7,6 +7,7 @@ import { EmployeeApiService } from 'app/api-services/employee-api.service';
 import { SearchQuery } from 'app/models/search-query.model';
 import { UsedAs } from 'app/models/used-as.enum';
 import { TechnologyApiService } from 'app/api-services/technology-api.service';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 @Component({
   selector: 'app-projects',
@@ -30,12 +31,14 @@ export class ProjectsComponent implements OnInit {
     private router: Router, 
     private employeeApi: EmployeeApiService,
     private technologyApi: TechnologyApiService,
-    private route: ActivatedRoute) 
+    private route: ActivatedRoute,
+    private authGuard: AuthGuard) 
     {
       this.psq = new SearchQuery() 
     }
 
   ngOnInit() {
+    this.authGuard.canRenderView();
     this.route.params.subscribe(param => {
       if(this.usedAs ===  UsedAs.OnTechnology){
         this.technologyId = parseInt(param['id']);

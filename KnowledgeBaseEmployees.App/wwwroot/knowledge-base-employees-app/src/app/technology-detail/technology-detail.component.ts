@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Technology } from 'app/models/technology.model';
 import { TechnologyApiService } from 'app/api-services/technology-api.service';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 @Component({
   selector: 'app-technology-detail',
@@ -18,7 +19,8 @@ export class TechnologyDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private technologyApi: TechnologyApiService,
-              private router: Router
+              private router: Router,
+              private authGuard: AuthGuard
               ){ 
     this.technology = new Technology();
     route.params.subscribe(param => {
@@ -26,6 +28,7 @@ export class TechnologyDetailComponent implements OnInit {
     });}
 
   ngOnInit() {
+    this.authGuard.canRenderView();
     this.initForm();
     if (this.technologyId) {
       this.loadTechnology();

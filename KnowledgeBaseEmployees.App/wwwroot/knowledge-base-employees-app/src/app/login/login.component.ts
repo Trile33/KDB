@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   userFormGroup: FormGroup;
   returnUrl: string;
   submitted = false;
-
+  currentUser;
   constructor(private route: ActivatedRoute, 
               private loginApiService: LoginApiService, 
               private router: Router, 
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    //this.loginApiService.logout();
+    this.loginApiService.logout();
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl' || '/'];
   }
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         () => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['home']);
         },
         () => {
           

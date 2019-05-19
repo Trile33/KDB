@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from 'app/models/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 import { EmployeeApiService } from 'app/api-services/employee-api.service';
 
@@ -18,7 +19,8 @@ export class EmployeeDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private employeeApiService: EmployeeApiService,
-    private router: Router) {
+    private router: Router,
+    private authGuard: AuthGuard) {
       this.employee = new Employee();
       route.params.subscribe(param => {
         this.employeeId = param['id'];
@@ -26,6 +28,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.authGuard.canRenderView();
     this.initForm();
     
     if (this.employeeId) {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using KnowledgeBaseEmployees.Repository;
+using KnowledgeBaseEmployees.Models;
 
 namespace KnowledgeBaseEmployees.Controllers
 {
@@ -20,14 +21,14 @@ namespace KnowledgeBaseEmployees.Controllers
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]string username, [FromBody]string password)
+        public IActionResult Authenticate([FromBody]User user)
         {
-            var user = _userRepository.Authenticate(username, password);
+            var dbUser = _userRepository.Authenticate(user.Username, user.Password);
 
-            if (user == null)
+            if (dbUser == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            return Ok(user);
+            return Ok(dbUser);
         }
     }
 }

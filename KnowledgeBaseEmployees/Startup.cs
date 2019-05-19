@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KnowledgeBaseEmployees.Data;
+using KnowledgeBaseEmployees.Models;
 using KnowledgeBaseEmployees.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft;
 
 namespace KnowledgeBaseEmployees
 {
@@ -30,8 +33,10 @@ namespace KnowledgeBaseEmployees
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<KnowledgeDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("KnowledgeDBContext")));
+
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
@@ -52,7 +57,7 @@ namespace KnowledgeBaseEmployees
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             app.UseCors("CorsPolicy");
 
@@ -65,6 +70,7 @@ namespace KnowledgeBaseEmployees
 #endif
 
             app.UseMvc();
+
         }
     }
 }

@@ -11,7 +11,7 @@ namespace KnowledgeBaseEmployees.Models.Responses
         public string Username { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
-        public Role Role { get; set; }
+        public string Role { get; set; }
         public IList<int> EmployeeIds { get; set; } = new List<int>();
 
         public UserResponse(User user)

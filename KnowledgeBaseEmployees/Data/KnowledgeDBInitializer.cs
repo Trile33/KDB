@@ -1,4 +1,5 @@
 ﻿using KnowledgeBaseEmployees.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace KnowledgeBaseEmployees.Data
@@ -104,9 +105,10 @@ namespace KnowledgeBaseEmployees.Data
 
             var users = new User[]
             {
-                new User{ Id = 1, Password = "a", Username = "Admin", Token = "token" , Role = Role.Admin },
-
+                new User{ Password = "a", Username = "admin", Token = "token" , Role = "Admin" },
+                new User { Password = "u", Username = "user", Token = "token", Role = "Employee", Employees = new List<Employee>() }
             };
+            users[1].Employees.Add(employees[0]);
             foreach (User u in users)
             {
                 context.Users.Add(u);

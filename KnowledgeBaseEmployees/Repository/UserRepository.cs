@@ -1,42 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KnowledgeBaseEmployees.Data;
+using KnowledgeBaseEmployees.Helpers;
 using KnowledgeBaseEmployees.Models;
-using KnowledgeBaseEmployees.Models.Responses;
-using KnowledgeBaseEmployees.Data;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
 
 namespace KnowledgeBaseEmployees.Repository
 {
     public class UserRepository : IUserRepository
     {
         public readonly KnowledgeDBContext _context;
-
-        public UserRepository(KnowledgeDBContext context)
+        private readonly AppSettings _appSettings;
+        public UserRepository(KnowledgeDBContext context, IOptions<AppSettings> appSettings)
         {
             _context = context;
+            _appSettings = appSettings.Value;
         }
 
         public User Authenticate(string username, string password)
         {
-
-            var userResp = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
-
-            // return null if user not found
-            if (userResp == null)
+            var user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            if (user == null)
                 return null;
 
-            // authentication successful so return user details without password
-            userResp.Password = null;
-            User user = new User
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("JwtTokenSecretKeyStringToEncode"); //TODO read from app settings
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Id = userResp.Id,
-                Password = userResp.Password,
-                Username = userResp.Username,
-                Token = userResp.Token,
-                Role = userResp.Role
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
 
             return user;
         }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authGuard: AuthGuard) { }
 
   ngOnInit() {
+    this.authGuard.canRenderView();
   }
 
 }

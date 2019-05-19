@@ -24,7 +24,7 @@ import { LoginApiService } from './api-services/login-api.service';
 
 const routes: Routes = [
   // basic routes
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
@@ -33,7 +33,8 @@ const routes: Routes = [
   { path: 'technologies', component: TechnologiesComponent },
   { path: 'technologies/:id', component: TechnologyDetailComponent },
   { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: 'home'}
+  { path: 'logout', component: LoginComponent},
+  { path: '**', redirectTo: 'login'}
 
 ];
 
