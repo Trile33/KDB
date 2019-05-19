@@ -3,7 +3,7 @@
     <div class="row">
             <div class="col-sm-4">
                 <button class="btn btn-light" [routerLink]="['/home']">Back</button>
-                <button class="btn btn-success" (click)="createNewEmployee()">
+                <button class="btn btn-success" (click)="createNewEmployee()" *ngIf="isAdmin">
                         <span class="fa fa-user-plus"></span>
                         Add new Employee
                 </button>
@@ -28,13 +28,13 @@
         </select> 
     </div> 
     <div *ngIf="usedAs===1">
-        <button class="btn btn-success" (click)="addEmployeeToProject()">
+        <button class="btn btn-success" (click)="addEmployeeToProject()" *ngIf="isAdmin">
                 <span class="fa fa-user-plus"></span>
                 Add to Project
         </button> 
     </div> 
     <div *ngIf="usedAs===3">
-        <button class="btn btn-success" (click)="addEmployeeToTechnology()">
+        <button class="btn btn-success" (click)="addEmployeeToTechnology()" *ngIf="isAdmin">
                 <span class="fa fa-user-plus"></span>
                 Add to Technology
         </button> 
@@ -45,12 +45,12 @@
 <div *ngFor="let employee of employees">
     <app-employee [employee]="employee" (click)="onRowSelected(employee)"></app-employee>
     <div *ngIf="usedAs===0">
-        <button class="btn btn-danger" (click)="delete(employee.id)">Delete</button>
+        <button class="btn btn-danger" (click)="delete(employee.id)" *ngIf="isAdmin">Delete</button>
     </div>
     <div *ngIf="usedAs===1">
-        <button class="btn btn-danger" (click)="deleteEmployeeFromProject(employee.id)">Delete from Project</button>
+        <button class="btn btn-danger" (click)="deleteEmployeeFromProject(employee.id)" *ngIf="isAdmin">Delete from Project</button>
     </div>
     <div *ngIf="usedAs===3">
-        <button class="btn btn-danger" (click)="deleteEmployeeFromTechnology(employee.id)">Delete from Technology</button>
+        <button class="btn btn-danger" (click)="deleteEmployeeFromTechnology(employee.id)" *ngIf="isAdmin">Delete from Technology</button>
     </div>
 </div>

@@ -38,7 +38,7 @@ export class ProjectsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.authGuard.canRenderView();
+    this.authGuard.isLoggedIn();
     this.route.params.subscribe(param => {
       if(this.usedAs ===  UsedAs.OnTechnology){
         this.technologyId = parseInt(param['id']);

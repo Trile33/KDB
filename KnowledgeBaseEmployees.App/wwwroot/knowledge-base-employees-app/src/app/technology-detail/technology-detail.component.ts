@@ -28,7 +28,7 @@ export class TechnologyDetailComponent implements OnInit {
     });}
 
   ngOnInit() {
-    this.authGuard.canRenderView();
+    this.authGuard.isLoggedIn();
     this.initForm();
     if (this.technologyId) {
       this.loadTechnology();

@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private authGuard: AuthGuard) { }
 
   ngOnInit() {
-    this.authGuard.canRenderView();
+    this.authGuard.isLoggedIn();
   }
 
 }

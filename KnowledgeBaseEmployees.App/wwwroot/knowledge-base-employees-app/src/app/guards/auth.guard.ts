@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { User } from 'app/models/user.model';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -18,12 +19,24 @@ export class AuthGuard implements CanActivate {
       return false;
   }
 
-  canRenderView(){
-    if (localStorage.getItem('currentUser')) {
-      return true;
+  isLoggedIn(){
+    let currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      let user: User = JSON.parse(currentUser);
+      return user.token !== undefined;
     }
 
     this.router.navigate(['/login']);
+    return false;
+  }
+
+  isAdmin(){
+    let currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      let user: User = JSON.parse(currentUser);
+      return user.role === 'Admin';
+    }
+
     return false;
   }
 }

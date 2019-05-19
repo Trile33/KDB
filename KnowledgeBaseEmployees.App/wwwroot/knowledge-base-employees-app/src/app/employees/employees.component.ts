@@ -28,7 +28,7 @@ export class EmployeesComponent implements OnInit {
   employeesForAdding: Employee[] = new Array<Employee>();
   selectedEmployee: Employee = null;
   esq: SearchQuery;
-
+  isAdmin: boolean = false;
   constructor(private employeeApiService: EmployeeApiService, 
               private route: ActivatedRoute, 
               private router: Router, 
@@ -40,7 +40,8 @@ export class EmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authGuard.canRenderView();
+    this.authGuard.isLoggedIn();
+    this.isAdmin =this.authGuard.isAdmin();
     this.route.params.subscribe(param => {
       if(this.usedAs ===  UsedAs.OnProject){
         this.projectId = parseInt(param['id']);

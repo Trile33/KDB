@@ -28,7 +28,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.authGuard.canRenderView();
+    this.authGuard.isLoggedIn();
     this.initForm();
     
     if (this.employeeId) {

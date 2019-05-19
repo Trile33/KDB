@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   userFormGroup: FormGroup;
   returnUrl: string;
   submitted = false;
-  currentUser;
+  infoMessage = '';
+  
   constructor(private route: ActivatedRoute, 
               private loginApiService: LoginApiService, 
               private router: Router, 
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home']);
         },
         () => {
-          
+          this.infoMessage = 'login failed.'
         });
   }
 }
